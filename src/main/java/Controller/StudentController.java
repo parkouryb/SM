@@ -10,14 +10,12 @@ import org.hibernate.Transaction;
 public class StudentController {
     private static SessionFactory factory = HibernateUtil.getSessionFactory();
 
-    public static void addStudent(Student student) {
+    public static long addStudent(Student student) {
         Session sessionObj = factory.openSession();
         Transaction transaction = null;
         try {
             transaction = sessionObj.beginTransaction();
-
             sessionObj.save(student);
-
             transaction.commit();
         } catch(HibernateException hibernateExeption) {
             if (transaction != null) {
@@ -26,12 +24,13 @@ public class StudentController {
         } finally {
             sessionObj.close();
         }
+        return student.getStudent_ID();
     }
 
     public static void main(String[] args) {
         Student student = new Student();
         student.setStudent_name("Alice");
-        StudentController.addStudent(student);
-
+        long id = StudentController.addStudent(student);
+        System.out.println(id);
     }
 }
