@@ -9,10 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.List;
 
 @Getter
@@ -69,6 +66,27 @@ public class StudentController {
             session.close();
         }
         return id;
+    }
+
+    public static List<Student> getStudents() {
+        Session session = factory.openSession();
+        Transaction transaction = null;
+        List<Student> students = null;
+        try {
+            transaction = session.beginTransaction();
+
+            students = session.createCriteria(Student.class).list();
+
+            transaction.commit();
+        } catch(HibernateException hibernataeExeption) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+
+        return students;
     }
 
 

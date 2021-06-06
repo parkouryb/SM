@@ -29,28 +29,28 @@ public class ClassroomController {
     }
 
     public static long getIDByName(String name) {
-//        Session session = factory.openSession();
-//        Transaction transaction = null;
-//        long id = -999;
-//        try {
-//            transaction = session.beginTransaction();
-//
-//            List<Classroom> lists = session.createCriteria(Classroom.class).list();
-//            for (Classroom classroom: lists) {
-//                if (classroom.getClass_name().equals(name)) {
-//                    id = classroom.getClassroom_ID();
-//                    break;
-//                }
-//            }
-//
-//            transaction.commit();
-//        } catch(HibernateException hibernataeExeption) {
-//            if (transaction != null) {
-//                transaction.rollback();
-//            }
-//        } finally {
-//            session.close();
-//        }
+        Session session = factory.openSession();
+        Transaction transaction = null;
+        long id = -999;
+        try {
+            transaction = session.beginTransaction();
+
+            List<Classroom> lists = session.createCriteria(Classroom.class).list();
+            for (Classroom classroom: lists) {
+                if (classroom.getClass_name().equals(name)) {
+                    id = classroom.getClassroom_ID();
+                    break;
+                }
+            }
+
+            transaction.commit();
+        } catch(HibernateException hibernataeExeption) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
 
         return 80001;
     }

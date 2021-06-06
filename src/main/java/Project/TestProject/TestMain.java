@@ -12,23 +12,32 @@ import java.util.List;
 
 public class TestMain {
     @Test
+    public void createDb() {
+        ClassroomController.createClassroom();
+    }
+
+    @Test
     public void test1() {
         Classroom classroom = new Classroom(80001);
 
         Student student1 = new Student();
         student1.setStudent_name("Alice");
-        student1.setBirthday("02/05/2005");
-        student1.setGender("Nam");
+        student1.setBirthday("02/02/2006");
+        student1.setGender("Nu");
         student1.setEmail("adc@hus");
         student1.setAndress("asdasdasdaso");
         student1.setClassroom(classroom);
 
         long id = StudentController.addStudent(student1);
-        System.out.println(id);
+        System.out.println("added " + id);
 
-//        Student student2 = StudentController.getStudentByID(10000);
-//        System.out.println(student2);
+        Student student2 = StudentController.getStudentByID(10000);
+        System.out.println(student2);
 
+        List<Student> students = StudentController.getStudents();
+        for (Student student: students) {
+            System.out.println("x " + student);
+        }
     }
 
     @Test
