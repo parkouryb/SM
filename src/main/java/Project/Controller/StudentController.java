@@ -74,9 +74,7 @@ public class StudentController {
         List<Student> students = null;
         try {
             transaction = session.beginTransaction();
-
             students = session.createCriteria(Student.class).list();
-
             transaction.commit();
         } catch(HibernateException hibernataeExeption) {
             if (transaction != null) {
@@ -85,7 +83,6 @@ public class StudentController {
         } finally {
             session.close();
         }
-
         return students;
     }
 

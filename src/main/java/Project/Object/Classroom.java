@@ -49,7 +49,10 @@ public class Classroom {
     @Override
     public String toString() {
         return "Classroom{" +
-                "class_name='" + class_name + '\'' +
+                "classroom_ID=" + classroom_ID +
+                ", number=" + number +
+                ", class_name='" + class_name + '\'' +
+                ", current='" + students.size() + '\'' +
                 '}';
     }
 }
