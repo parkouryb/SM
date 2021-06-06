@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE hibernate-configuration PUBLIC
-        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "-//Project.Hibernate/Project.Hibernate Configuration DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 
 <hibernate-configuration>
@@ -21,10 +21,10 @@
 
         <property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
 
-<!--        <mapping class="Object.Subject" />-->
-<!--        <mapping class="Object.Classroom" />-->
-<!--        <mapping class="Object.Study" />-->
-        <mapping class="Object.Student" />
+<!--        <mapping class="Project.Object.Subject" />-->
+        <mapping class="Project.Object.Classroom" />
+<!--        <mapping class="Project.Object.Study" />-->
+        <mapping class="Project.Object.Student" />
 
 
     </session-factory>
