@@ -107,5 +107,52 @@ public class StudentController {
         return students;
     }
 
+    public static int updateScore(int student_ID, Study study) {
+        Student student = getStudentByID(student_ID);
+        if (student == null)
+            return -2; // loi student null
 
+        Session session = factory.openSession();
+        Transaction transaction = null;
+        int flag = 0;
+        try {
+            transaction = session.beginTransaction();
+            if (study.getStudyPK().getSubject().getSemester() == 1) {
+                double x = study.getScore_mean() + student.getScore_I();
+                student.setScore_I(x / student.getNum_I());
+            }
+            else {
+                double x = study.getScore_mean() + student.getScore_II();
+                student.setScore_I(x / student.getNum_II());
+            }
+            session.update(student);
+
+            transaction.commit();
+        } catch(HibernateException hibernataeExeption) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            flag = -1;
+        } finally {
+            session.close();
+        }
+        return flag;
+    }
+
+    public static void createStudents() {
+        Student student1 = new Student();
+        student1.setStudent_name("Alice");
+        student1.setBirthday("02/02/2006");
+        StudentController.addStudent(student1);
+
+        Student student2 = new Student();
+        student2.setStudent_name("Bob");
+        student2.setBirthday("28/12/2005");
+        StudentController.addStudent(student2);
+
+        Student student3 = new Student();
+        student3.setStudent_name("Ceci");
+        student3.setBirthday("13/08/2006");
+        StudentController.addStudent(student3);
+    }
 }

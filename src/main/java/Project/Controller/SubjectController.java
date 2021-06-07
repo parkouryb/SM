@@ -1,12 +1,15 @@
 package Project.Controller;
 
 import Project.Hibernate.HibernateUtil;
+import Project.Object.Classroom;
 import Project.Object.Student;
 import Project.Object.Subject;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+
+import java.util.List;
 
 public class SubjectController {
     private static SessionFactory factory = HibernateUtil.getSessionFactory();
@@ -39,4 +42,31 @@ public class SubjectController {
         }
 
     }
+
+    public static Subject getSubjectByName(String subject_name, int semester) {
+        Session session = factory.openSession();
+        Transaction transaction = null;
+        Subject subject = null;
+        try {
+            transaction = session.beginTransaction();
+
+            List<Subject> lists = session.createCriteria(Subject.class).list();
+            for (Subject sb: lists) {
+                if (sb.getSubject_name().equals(subject_name) && sb.getSemester() == semester) {
+                    subject = sb;
+                    break;
+                }
+            }
+
+            transaction.commit();
+        } catch(HibernateException hibernateExeption) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return subject;
+    }
+
 }

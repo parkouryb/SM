@@ -9,6 +9,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.id.enhanced.SequenceStyleGenerator;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Getter @Setter
 @NoArgsConstructor
@@ -34,17 +35,19 @@ public class Subject {
     @Column(name="subject_ID")
     private long subject_ID;
 
+    @Column(name="subject_name")
+    private String subject_name;
+
     @Column(name="semester")
     private Integer semester;
 
-    @Column(name="subject_name")
-    private String subject_name;
+    @OneToMany(mappedBy = "studyPK.subject", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Collection<Study> studies;
 
     @Override
     public String toString() {
         return "Subject{" +
                 "subject_ID='" + subject_ID + '\'' +
-                ", semester=" + semester +
                 ", subject_name='" + subject_name + '\'' +
                 '}';
     }
