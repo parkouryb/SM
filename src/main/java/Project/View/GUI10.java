@@ -4,7 +4,12 @@
  * and open the template in the editor.
  */
 package Project.View;
+import Project.Controller.ClassroomController;
+import Project.Controller.StudentController;
+import Project.Object.Student;
+
 import java.text.SimpleDateFormat;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -49,11 +54,16 @@ public class GUI10 extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(1062, 850));
 
         jLabel1.setFont(new java.awt.Font("Arial", 3, 36)); // NOI18N
-        jLabel1.setText("Danh Sách Học Sinh Khối 10");
+        jLabel1.setText("Danh Sách Học Sinh");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10A1", "10A2", "10A3", "10A4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10A1", "10A2", "10A3", "10A4", "11A1", "11A2", "11A3", "12A1", "12A2" }));
 
-        jButton1.setText("Search");
+        jButton1.setText("Danh sách");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,7 +85,7 @@ public class GUI10 extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(300, Short.MAX_VALUE)
+                .addContainerGap(302, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(270, 270, 270))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -113,7 +123,7 @@ public class GUI10 extends javax.swing.JPanel {
 
             },
             new String [] {
-                "STT", "Họ Tên", "Giới Tính", "Năm Sinh", "Địa Chỉ"
+                "MaHV", "Họ Tên", "Giới Tính", "Năm Sinh", "Địa Chỉ"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -132,7 +142,7 @@ public class GUI10 extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -159,13 +169,38 @@ public class GUI10 extends javax.swing.JPanel {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_jTextField1ActionPerformed
+    public void showResult() {
+        List<Student> students = (List<Student>) ClassroomController.getStudents(jComboBox1.getSelectedItem().toString());
+        Student student = students.get(students.size()-1);
+        model.addRow(new Object[]{
+                student.getStudent_ID(), student.getStudent_name(), student.getGender(), student.getBirthday(), student.getAndress(), student.getEmail()
+        });
+    }
+    public void showDatabase() {
+        model.setRowCount(0);
+        List<Student> students = (List<Student>) ClassroomController.getStudents(jComboBox1.getSelectedItem().toString());
 
+        for (Student student : students) {
+            model.addRow(new Object[]{
+                    student.getStudent_ID(), student.getStudent_name(), student.getGender(), student.getBirthday(), student.getAndress(), student.getEmail()
+            });
+        }
+
+    }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        long id = Integer.parseInt(jTextField1.getText());
+        ClassroomController.addStudentToClass(id, jComboBox1.getSelectedItem().toString());
+        showResult();
 
         
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        showDatabase();
+    }//GEN-LAST:event_jButton1ActionPerformed
   
     
 

@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 /**
  *
@@ -27,6 +28,7 @@ public class GUIStudent extends javax.swing.JPanel {
     public GUIStudent() {
         initComponents();
         model = (DefaultTableModel) jTable1.getModel();
+        showDatabase();
     }
 
     /**
@@ -134,10 +136,25 @@ public class GUIStudent extends javax.swing.JPanel {
         });
 
         jButton2.setText("Sửa");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Xóa");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Tìm Kiếm");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -231,21 +248,65 @@ public class GUIStudent extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
       int i=1001;
+    public void showResult() {
+        List<Student> s= (List<Student>) StudentController.getStudents();
+        Student student = s.get(s.size()-1);
+        model.addRow(new Object[]{
+                student.getStudent_ID(), student.getStudent_name(), student.getGender(), student.getBirthday(), student.getAndress(), student.getEmail()
+        });
+    }
+    public void showDatabase() {
+        List<Student> students = (List<Student>) StudentController.getStudents();
+        for (Student student : students) {
+            model.addRow(new Object[]{
+                    student.getStudent_ID(), student.getStudent_name(), student.getGender(), student.getBirthday(), student.getAndress(), student.getEmail()
+            });
+        }
+    }
+
     private void jButton1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+
         Student student1 = new Student();
-        student1.setStudent_name(txtName.getText());
-        student1.setBirthday(txtNgaysinh.getText());
-        student1.setGender(txtGender.getSelectedItem().toString());
-        student1.setAndress(txtadderss.getText());
-        student1.setEmail(txtEmail.getText());
-        long id = StudentController.addStudent(student1);
-        System.out.println(id);
+
+            student1.setStudent_name(txtName.getText());
+            student1.setBirthday(txtNgaysinh.getText());
+
+            student1.setGender(txtGender.getSelectedItem().toString());
+            student1.setAndress(txtadderss.getText());
+            student1.setEmail(txtEmail.getText());
+            long id = StudentController.addStudent(student1);
+            switch ((int) id) {
+                case -2:
+                    JOptionPane.showMessageDialog(this, "Lưu không thành công!!!");
+                    break;
+                case -3:
+                    JOptionPane.showMessageDialog(this, "Số tuổi hợp lệ từ 15-20");
+                    break;
+                case -1:
+                    JOptionPane.showMessageDialog(this, "Định dạng dd/mm/yyyy");
+                    break;
+                default:
+
+            }
+
+        showResult();
         System.out.println("Done!!!");
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -269,10 +330,5 @@ public class GUIStudent extends javax.swing.JPanel {
     private javax.swing.JTextField txtadderss;
     // End of variables declaration//GEN-END:variables
 
-    public void showResult() {
-//        Student s = list.get(list.size()-1);
-//         model.addRow(new Object[]{
-//             s.getmaNV(),s.gettennv(),s.getgioitinh(),date_format.format(s.getngaysinh()),s.getdiachi(),s.getEmail()
-//         });
-    }
+
 }

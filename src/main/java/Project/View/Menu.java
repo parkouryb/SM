@@ -14,8 +14,6 @@ public class Menu extends javax.swing.JFrame {
     GridBagLayout layout = new GridBagLayout();
     GUIStudent hocvien;
     GUI10 Class10;
-    GUI11 Class11;
-    GUI12 Class12;
     GUILession lession;
     GUIObject Object;
     GUIEndYear endyear;
@@ -28,8 +26,6 @@ public class Menu extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         hocvien= new GUIStudent();
         Class10= new GUI10();
-        Class11= new GUI11();
-        Class12= new GUI12();
         lession=new GUILession();
         Object= new GUIObject();
         endyear = new GUIEndYear();
@@ -43,10 +39,7 @@ public class Menu extends javax.swing.JFrame {
         jpnView.add(Class10,c);
         c.gridx= 0;
         c.gridx=0;
-        jpnView.add(Class11,c);
-        c.gridx= 0;
-        c.gridx=0;
-        jpnView.add(Class12,c);
+  
         c.gridx= 0;
         c.gridx=0;
         jpnView.add(Object,c);
@@ -76,10 +69,7 @@ public class Menu extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jpnView = new javax.swing.JPanel();
 
@@ -138,7 +128,7 @@ public class Menu extends javax.swing.JFrame {
         jButton4.setBackground(new java.awt.Color(0, 51, 102));
         jButton4.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jButton4.setForeground(new java.awt.Color(250, 250, 250));
-        jButton4.setText("Học Kỳ");
+        jButton4.setText("Học Kì");
         jButton4.setMaximumSize(new java.awt.Dimension(85, 25));
         jButton4.setMinimumSize(new java.awt.Dimension(85, 25));
         jButton4.setPreferredSize(new java.awt.Dimension(85, 25));
@@ -158,31 +148,13 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setBackground(new java.awt.Color(0, 51, 102));
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(250, 250, 250));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Danh Sách Lớp");
-        jLabel2.setToolTipText("");
-
-        jButton6.setText("Khối 10");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setBackground(new java.awt.Color(0, 51, 102));
+        jButton2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(250, 250, 250));
+        jButton2.setText("Danh Sách Lớp");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
-        jButton7.setText("Khối 11");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-
-        jButton8.setText("Khối 12");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -194,10 +166,9 @@ public class Menu extends javax.swing.JFrame {
             .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
-            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,20 +176,14 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(220, Short.MAX_VALUE))
+                .addContainerGap(298, Short.MAX_VALUE))
         );
 
         jpnView.setPreferredSize(new java.awt.Dimension(1062, 850));
@@ -247,7 +212,7 @@ public class Menu extends javax.swing.JFrame {
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                .addComponent(jpnView, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
+                .addComponent(jpnView, javax.swing.GroupLayout.DEFAULT_SIZE, 727, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -280,8 +245,6 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
          hocvien.setVisible(true);
          Class10.setVisible(false);
-         Class11.setVisible(false);
-         Class12.setVisible(false);
          Object.setVisible(false);
          lession.setVisible(false);
          endyear.setVisible(false);
@@ -292,8 +255,6 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
          hocvien.setVisible(false);
          Class10.setVisible(false);
-         Class11.setVisible(false);
-         Class12.setVisible(false);
          Object.setVisible(true);
          lession.setVisible(false);
          endyear.setVisible(false);
@@ -303,8 +264,6 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
          hocvien.setVisible(false);
          Class10.setVisible(false);
-         Class11.setVisible(false);
-         Class12.setVisible(false);
          Object.setVisible(false);
          lession.setVisible(true);
          endyear.setVisible(false);
@@ -314,46 +273,20 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
          hocvien.setVisible(false);
          Class10.setVisible(false);
-         Class11.setVisible(false);
-         Class12.setVisible(false);
          Object.setVisible(false);
          lession.setVisible(false);
          endyear.setVisible(true);
 
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
          hocvien.setVisible(false);
          Class10.setVisible(true);
-         Class11.setVisible(false);
-         Class12.setVisible(false);
          Object.setVisible(false);
          lession.setVisible(false);
          endyear.setVisible(false);
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-        hocvien.setVisible(false);
-         Class10.setVisible(false);
-         Class11.setVisible(true);
-         Class12.setVisible(false);
-         Object.setVisible(false);
-         lession.setVisible(false);
-         endyear.setVisible(false);
-    }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-        hocvien.setVisible(false);
-         Class10.setVisible(false);
-         Class11.setVisible(false);
-         Class12.setVisible(true);
-         Object.setVisible(false);
-         lession.setVisible(false);
-         endyear.setVisible(false);
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
    
     /**
      * @param args the command line arguments
@@ -389,17 +322,15 @@ public class Menu extends javax.swing.JFrame {
             }
         });
     }
+    //comment
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
