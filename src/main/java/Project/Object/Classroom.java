@@ -33,7 +33,6 @@ public class Classroom {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "INST_PK_SEQ_CLASSROOM")
     @Column(name="classroom_ID")
     private long classroom_ID;
-
     @Column(name="number")
     private Integer number;
     @Column(name="classname")

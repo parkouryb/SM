@@ -2,12 +2,9 @@ package Project.TestProject;
 
 import Project.Controller.ClassroomController;
 import Project.Controller.StudentController;
-import Project.Hibernate.HibernateUtil;
-import Project.Object.Classroom;
 import Project.Object.Student;
 import org.junit.Test;
 
-import java.util.Collection;
 import java.util.List;
 
 public class TestMain {
@@ -51,8 +48,21 @@ public class TestMain {
     }
 
     @Test
+    public void deleteClassroom() {
+        System.out.println(ClassroomController.deleteClassroom("12A1"));
+    }
+
+    @Test
     public void listAllStudents() {
         List<Student> students = (List<Student>) ClassroomController.getStudents("10A3");
+        for (Student student: students) {
+            System.out.println(student);
+        }
+    }
+
+    @Test
+    public void listAllStudentsStudentController() {
+        List<Student> students = StudentController.getStudents();
         for (Student student: students) {
             System.out.println(student);
         }

@@ -187,4 +187,28 @@ public class ClassroomController {
             addClassroom(classroom);
         }
     }
+
+    public static int deleteClassroom(String name) {
+        long id = getIDByName(name);
+        if (id < 0) return -3;
+        Classroom classroom = getClassroomByID(id);
+        if (classroom == null) return -4;
+
+        Session session = factory.openSession();
+        Transaction transaction = null;
+        int flag = 0;
+        try {
+            transaction = session.beginTransaction();
+            session.delete(classroom);
+            transaction.commit();
+        } catch(HibernateException hibernataeExeption) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            flag = -1;
+        } finally {
+            session.close();
+        }
+        return flag;
+    }
 }

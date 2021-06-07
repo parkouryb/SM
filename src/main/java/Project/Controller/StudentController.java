@@ -12,13 +12,27 @@ import org.hibernate.Transaction;
 import java.util.Calendar;
 import java.util.List;
 
-@Getter
-@Setter
 public class StudentController {
     private static SessionFactory factory = HibernateUtil.getSessionFactory();
 
     private static int limitLowAge = 15;
     private static int limitHighAge = 20;
+
+    public static int getLimitLowAge() {
+        return limitLowAge;
+    }
+
+    public static void setLimitLowAge(int limitLowAge) {
+        StudentController.limitLowAge = limitLowAge;
+    }
+
+    public static int getLimitHighAge() {
+        return limitHighAge;
+    }
+
+    public static void setLimitHighAge(int limitHighAge) {
+        StudentController.limitHighAge = limitHighAge;
+    }
 
     public static Student getStudentByID(long id) {
         Session session = factory.openSession();
