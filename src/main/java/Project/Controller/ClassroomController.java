@@ -8,6 +8,12 @@ import java.util.Collection;
 import java.util.List;
 
 public class ClassroomController {
+    // -1: loi db
+    // -2: lop hoc full nguoi
+    // -3: id null
+    // -4: lop hoc khong tim duoc
+
+
     private static SessionFactory factory = HibernateUtil.getSessionFactory();
 
     public static int addClassroom(Classroom classroom) {

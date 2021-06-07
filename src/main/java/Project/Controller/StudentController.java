@@ -13,6 +13,9 @@ import java.util.Calendar;
 import java.util.List;
 
 public class StudentController {
+    // -1: loi db
+    // -2: out age range
+    // -3: nhap birthday sai format hoặc null
     private static SessionFactory factory = HibernateUtil.getSessionFactory();
 
     private static int limitLowAge = 15;
@@ -57,17 +60,17 @@ public class StudentController {
     public static long addStudent(Student student) {
         Session session = factory.openSession();
         Transaction transaction = null;
-        long id = -999;
+        long id = -1;
         try {
             transaction = session.beginTransaction();
             System.out.println(student);
             int year = Calendar.getInstance().get(Calendar.YEAR);
             if (student.getBirthday() == null) {
-                return -404;
+                return -3;
             }
             int age = year - Integer.parseInt(student.getBirthday().split("/")[2]);
             if (age > limitHighAge || age < limitLowAge) {
-                return -1;
+                return -2;
             }
             session.save(student);
             id = student.getStudent_ID();
