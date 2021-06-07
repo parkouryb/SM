@@ -22,9 +22,9 @@
 
         <property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
 
-<!--        <mapping class="Project.Object.Subject" />-->
+        <mapping class="Project.Object.Subject" />
         <mapping class="Project.Object.Classroom" />
-<!--        <mapping class="Project.Object.Study" />-->
+        <mapping class="Project.Object.Study" />
         <mapping class="Project.Object.Student" />
 
 

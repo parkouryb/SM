@@ -2,6 +2,7 @@ package Project.TestProject;
 
 import Project.Controller.ClassroomController;
 import Project.Controller.StudentController;
+import Project.Controller.SubjectController;
 import Project.Object.Student;
 import org.junit.Test;
 
@@ -68,4 +69,8 @@ public class TestMain {
         }
     }
 
+    @Test
+    public void createDb2() {
+        SubjectController.createSubjects();
+    }
 }

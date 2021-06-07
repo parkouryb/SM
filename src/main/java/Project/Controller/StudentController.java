@@ -66,14 +66,18 @@ public class StudentController {
             System.out.println(student);
             int year = Calendar.getInstance().get(Calendar.YEAR);
             if (student.getBirthday() == null) {
-                return -3;
+                id = -3;
             }
-            int age = year - Integer.parseInt(student.getBirthday().split("/")[2]);
-            if (age > limitHighAge || age < limitLowAge) {
-                return -2;
+            else {
+                int age = year - Integer.parseInt(student.getBirthday().split("/")[2]);
+                if (age > limitHighAge || age < limitLowAge) {
+                    id = -2;
+                }
+                else {
+                    session.save(student);
+                    id = student.getStudent_ID();
+                }
             }
-            session.save(student);
-            id = student.getStudent_ID();
             transaction.commit();
         } catch(HibernateException hibernateExeption) {
             if (transaction != null) {
