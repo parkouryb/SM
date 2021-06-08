@@ -96,7 +96,7 @@ public class TestMain {
     @Test
     public void bieuMau4() {
         Student student = StudentController.getStudentByID(10000);
-        Subject subject = SubjectController.getSubjectByName("Van", 1);
+        Subject subject = SubjectController.getSubjectByName("Van", 2);
 
         Study study = StudyController.getStudyByName(student, subject);
         System.out.println(study);
