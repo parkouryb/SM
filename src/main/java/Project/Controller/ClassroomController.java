@@ -73,10 +73,10 @@ public class ClassroomController {
         return id;
     }
 
-    public static Collection<Student> getStudents(String classroom_name) {
+    public static Set<Student> getStudents(String classroom_name) {
         Session session = factory.openSession();
         Transaction transaction = null;
-        Collection<Student> students = null;
+        Set<Student> students = null;
         try {
             transaction = session.beginTransaction();
 

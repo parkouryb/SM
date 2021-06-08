@@ -4,12 +4,10 @@ import Project.Hibernate.HibernateUtil;
 import Project.Object.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -90,13 +88,14 @@ public class StudentController {
         return id;
     }
 
-    public static List<Student> getStudents() {
+    public static Set<Student> getStudents() {
         Session session = factory.openSession();
         Transaction transaction = null;
-        List<Student> students = null;
+        Set<Student> students = null;
         try {
             transaction = session.beginTransaction();
-            students = session.createCriteria(Student.class).list();
+            List<Student> list = session.createCriteria(Student.class).list();
+            students = new HashSet<>(list);
             transaction.commit();
         } catch(HibernateException hibernataeExeption) {
             if (transaction != null) {

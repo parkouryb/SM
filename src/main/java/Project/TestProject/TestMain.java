@@ -26,6 +26,7 @@ public class TestMain {
         System.out.println(ClassroomController.addStudentToClass(10004, "10A3"));
 
         SubjectController.addSubjectStudent();
+
     }
 
     @Test
@@ -51,7 +52,7 @@ public class TestMain {
 
     @Test
     public void listAllStudents() {
-        List<Student> students = (List<Student>) ClassroomController.getStudents("10A3");
+        Set<Student> students = ClassroomController.getStudents("10A3");
         for (Student student: students) {
             System.out.println(student);
         }
@@ -59,10 +60,10 @@ public class TestMain {
 
     @Test
     public void listAllStudentsStudentController() {
-        List<Student> students = StudentController.getStudents();
-        for (Student student: students) {
-            System.out.println(student);
-        }
+        Set<Student> students = StudentController.getStudents();
+//        for (Student student: students) {
+//            System.out.println(student);
+//        }
     }
 
     @Test

@@ -22,11 +22,11 @@ public class Study implements Serializable{
     @Embeddable
     public static class StudyPK implements Serializable {
         @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.MERGE)
-        @JoinColumn(name = "student_ID", insertable = false, updatable = false)
+        @JoinColumn(name = "student_ID")
         protected Student student;
 
         @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.MERGE)
-        @JoinColumn(name = "subject_ID", insertable = false, updatable = false)
+        @JoinColumn(name = "subject_ID")
         protected Subject subject;
 
         public StudyPK() {

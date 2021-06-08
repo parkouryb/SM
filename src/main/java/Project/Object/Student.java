@@ -48,11 +48,11 @@ public class Student {
     @Column(name="email")
     private String email;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "classroom_ID")
     private Classroom classroom;
 
-    @OneToMany(mappedBy = "studyPK.student", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "studyPK.student", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Study> studies = new HashSet<>();
 
     @Override

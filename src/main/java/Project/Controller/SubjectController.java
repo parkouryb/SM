@@ -115,7 +115,7 @@ public class SubjectController {
     public static void addSubjectStudent() {
         double leftLimit = 1D;
         double rightLimit = 10D;
-        String[] names = new String[]{"Toan", "Van", "Hoa"};
+        String[] names = new String[]{"Toan"};
         for (int id = 10000;id <= 10004;++ id) {
             Student student = StudentController.getStudentByID(id);
             for (String name: names) {
