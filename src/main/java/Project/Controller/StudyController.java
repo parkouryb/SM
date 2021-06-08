@@ -24,6 +24,8 @@ public class StudyController {
             student.getStudies().add(study);
             subject.getStudies().add(study);
             session.save(study);
+            session.update(student);
+            session.update(subject);
 
             transaction.commit();
         } catch(HibernateException hibernataeExeption) {
@@ -86,4 +88,6 @@ public class StudyController {
 
         return study;
     }
+
+
 }

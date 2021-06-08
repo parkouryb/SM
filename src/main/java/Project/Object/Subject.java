@@ -45,7 +45,7 @@ public class Subject {
     @Column(name="semester")
     private Integer semester;
 
-    @OneToMany(mappedBy = "studyPK.subject", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "studyPK.subject", fetch = FetchType.EAGER, cascade = CascadeType.MERGE, orphanRemoval = true)
     private Set<Study> studies = new HashSet<>();
 
     @Override

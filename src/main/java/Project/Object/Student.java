@@ -35,7 +35,7 @@ public class Student {
     )
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "INST_PK_SEQ_STUDENT")
     @Column(name = "student_ID")
-    private long student_ID = 1000;
+    private long student_ID;
 
     @Column(name="name")
     private String student_name;
@@ -48,11 +48,11 @@ public class Student {
     @Column(name="email")
     private String email;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "classroom_ID")
     private Classroom classroom;
 
-    @OneToMany(mappedBy = "studyPK.student", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "studyPK.student", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     private Set<Study> studies = new HashSet<>();
 
     @Override

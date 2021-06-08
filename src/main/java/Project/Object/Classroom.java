@@ -4,11 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.id.enhanced.SequenceStyleGenerator;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Set;
 
 @Getter @Setter
 @NoArgsConstructor
@@ -38,8 +40,8 @@ public class Classroom {
     @Column(name="classname")
     private String class_name;
 
-    @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Collection<Student> students;
+    @OneToMany(mappedBy = "classroom", fetch = FetchType.LAZY)
+    private Set<Student> students;
 
     public Classroom(long classroom_ID) {
         this.classroom_ID = classroom_ID;

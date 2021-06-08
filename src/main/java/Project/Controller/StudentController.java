@@ -136,5 +136,37 @@ public class StudentController {
         student3.setStudent_name("Ceci");
         student3.setBirthday("13/08/2006");
         StudentController.addStudent(student3);
+
+        Student student4 = new Student();
+        student4.setStudent_name("Dev Nguyen");
+        student4.setBirthday("10/03/2005");
+        StudentController.addStudent(student4);
+
+        Student student5 = new Student();
+        student5.setStudent_name("Evan");
+        student5.setBirthday("19/05/2006");
+        StudentController.addStudent(student5);
+    }
+
+    public static void updateClassroom(Classroom classroom) {
+        Session session = factory.openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+
+            Set<Student> students = classroom.getStudents();
+            for (Student student: students) {
+                student.setClassroom(null);
+                session.update(student);
+            }
+
+            transaction.commit();
+        } catch(HibernateException hibernateExeption) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
     }
 }

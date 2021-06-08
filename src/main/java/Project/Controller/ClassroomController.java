@@ -6,6 +6,7 @@ import org.hibernate.*;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 public class ClassroomController {
     // -1: loi db
@@ -13,6 +14,15 @@ public class ClassroomController {
     // -3: id null
     // -4: lop hoc khong tim duoc
 
+    private static double diemxephang = 5.0;
+
+    public static double getDiemxephang() {
+        return diemxephang;
+    }
+
+    public static void setDiemxephang(double diemxephang) {
+        ClassroomController.diemxephang = diemxephang;
+    }
 
     private static SessionFactory factory = HibernateUtil.getSessionFactory();
 
@@ -107,32 +117,19 @@ public class ClassroomController {
     }
 
     public static int addStudentToClass(long student_ID, String classroom_name) {
+        Student student = StudentController.getStudentByID(student_ID);
+        Classroom classroom = ClassroomController.getClassroomByID(ClassroomController.getIDByName(classroom_name));
+        if (student == null || classroom == null) {
+            return -2;
+        }
         Session session = factory.openSession();
         Transaction transaction = null;
         int flag = 0;
         try {
             transaction = session.beginTransaction();
-
-            long id = getIDByName(classroom_name);
-            if (id < 0) {
-                flag = -3;
-            }
-            else {
-                Classroom classroom = getClassroomByID(id);
-                if (classroom == null) {
-                    flag = -4;
-                }
-                else {
-                    if (classroom.getStudents().size() + 1 > classroom.getNumber()) {
-                        flag = -2; // out number
-                    }
-                    else {
-                        Student student = StudentController.getStudentByID(student_ID);
-                        student.setClassroom(classroom);
-                        session.update(student);
-                    }
-                }
-            }
+            classroom.getStudents().add(student);
+            student.setClassroom(classroom);
+            session.update(student);
 
             transaction.commit();
         } catch(HibernateException hibernataeExeption) {
@@ -200,6 +197,8 @@ public class ClassroomController {
         Classroom classroom = getClassroomByID(id);
         if (classroom == null) return -4;
 
+        StudentController.updateClassroom(classroom);
+
         Session session = factory.openSession();
         Transaction transaction = null;
         int flag = 0;
@@ -217,4 +216,46 @@ public class ClassroomController {
         }
         return flag;
     }
+
+    public static Bieumau5 getInfo52(Classroom classroom, int semester) {
+        Bieumau5 bieumau5 = new Bieumau5();
+        Collection<Student> students = classroom.getStudents();
+        int count = 0;
+        for (Student student: students) {
+            double diem = StudentController.getScoreSemester(student, semester);
+            if (diem >= diemxephang) {
+                count ++;
+            }
+        }
+        bieumau5.setClassroom_name(classroom.getClass_name());
+        bieumau5.setNumber(classroom.getStudents().size());
+        bieumau5.setPass(count);
+        return bieumau5;
+    }
+
+    public static Bieumau5 getInfo51(Classroom classroom, Subject subject) {
+        Bieumau5 bieumau5 = new Bieumau5();
+        Collection<Student> students = classroom.getStudents();
+        int count = 0;
+        for (Student student: students) {
+            Set<Study> studies = student.getStudies();
+            double diem = 0.0;
+            for (Study study: studies) {
+                Subject temp = study.getStudyPK().getSubject();
+                if (temp.getSemester().equals(subject.getSemester()) && temp.getSubject_name().equals(subject.getSubject_name())) {
+                    diem = study.getScore_mean();
+                    break;
+                }
+            }
+            if (diem >= diemxephang) {
+                count ++;
+            }
+        }
+        bieumau5.setPass(count);
+        bieumau5.setNumber(classroom.getStudents().size());
+        bieumau5.setClassroom_name(classroom.getClass_name());
+
+        return bieumau5;
+    }
+
 }

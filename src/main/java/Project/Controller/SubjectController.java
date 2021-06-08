@@ -3,6 +3,7 @@ package Project.Controller;
 import Project.Hibernate.HibernateUtil;
 import Project.Object.Classroom;
 import Project.Object.Student;
+import Project.Object.Study;
 import Project.Object.Subject;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -10,6 +11,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 public class SubjectController {
     private static SessionFactory factory = HibernateUtil.getSessionFactory();
@@ -90,4 +93,46 @@ public class SubjectController {
         return flag;
     }
 
+    public static Set<Study> getStudents(Subject subject, Classroom classroom) {
+        Set<Study> studies = null;
+        Session session = factory.openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            studies = subject.getStudies();
+
+            transaction.commit();
+        } catch(HibernateException hibernateExeption) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return studies;
+    }
+
+    public static void addSubjectStudent() {
+        double leftLimit = 1D;
+        double rightLimit = 10D;
+        String[] names = new String[]{"Toan", "Van", "Hoa"};
+        for (int id = 10000;id <= 10004;++ id) {
+            Student student = StudentController.getStudentByID(id);
+            for (String name: names) {
+                for (int i = 1;i <= 2;++ i) {
+                    Subject subject = SubjectController.getSubjectByName(name, i);
+
+                    Study study = new Study(new Study.StudyPK(student, subject));
+                    double generatedDouble = leftLimit + new Random().nextDouble() * (rightLimit - leftLimit);
+                    study.setScore_15(generatedDouble);
+                    generatedDouble = leftLimit + new Random().nextDouble() * (rightLimit - leftLimit);
+                    study.setScore_45(generatedDouble);
+                    generatedDouble = leftLimit + new Random().nextDouble() * (rightLimit - leftLimit);
+                    study.setScore_mean(generatedDouble);
+
+                    StudyController.addStudy(study);
+                }
+            }
+        }
+    }
 }

@@ -4,9 +4,7 @@ import Project.Controller.ClassroomController;
 import Project.Controller.StudentController;
 import Project.Controller.StudyController;
 import Project.Controller.SubjectController;
-import Project.Object.Student;
-import Project.Object.Study;
-import Project.Object.Subject;
+import Project.Object.*;
 import org.junit.Test;
 
 import java.util.List;
@@ -20,6 +18,14 @@ public class TestMain {
         StudentController.createStudents();
 
         SubjectController.createSubjects();
+
+        System.out.println(ClassroomController.addStudentToClass(10000, "10A3"));
+        System.out.println(ClassroomController.addStudentToClass(10001, "10A3"));
+        System.out.println(ClassroomController.addStudentToClass(10002, "10A3"));
+        System.out.println(ClassroomController.addStudentToClass(10003, "10A3"));
+        System.out.println(ClassroomController.addStudentToClass(10004, "10A3"));
+
+        SubjectController.addSubjectStudent();
     }
 
     @Test
@@ -40,7 +46,7 @@ public class TestMain {
 
     @Test
     public void deleteClassroom() {
-        System.out.println(ClassroomController.deleteClassroom("12A1"));
+        System.out.println(ClassroomController.deleteClassroom("10A3"));
     }
 
     @Test
@@ -100,5 +106,20 @@ public class TestMain {
 
         Study study = StudyController.getStudyByName(student, subject);
         System.out.println(study);
+    }
+
+    @Test
+    public void bieumau52() {
+        Classroom classroom = ClassroomController.getClassroomByID(ClassroomController.getIDByName("10A3"));
+        Bieumau5 bieumau5 = ClassroomController.getInfo52(classroom, 1);
+        System.out.println(bieumau5);
+    }
+
+    @Test
+    public void bieumau51() {
+        Classroom classroom = ClassroomController.getClassroomByID(ClassroomController.getIDByName("10A3"));
+        Subject subject = SubjectController.getSubjectByName("Toan", 1);
+        Bieumau5 bieumau5 = ClassroomController.getInfo51(classroom, subject);
+        System.out.println(bieumau5);
     }
 }
