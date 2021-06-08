@@ -9,8 +9,12 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.id.enhanced.SequenceStyleGenerator;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
+@Transactional
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -41,8 +45,8 @@ public class Subject {
     @Column(name="semester")
     private Integer semester;
 
-    @OneToMany(mappedBy = "studyPK.subject", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Collection<Study> studies;
+    @OneToMany(mappedBy = "studyPK.subject", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Study> studies = new HashSet<>();
 
     @Override
     public String toString() {

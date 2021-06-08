@@ -10,6 +10,8 @@ import org.hibernate.id.enhanced.SequenceStyleGenerator;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter @Setter
 @NoArgsConstructor
@@ -45,22 +47,13 @@ public class Student {
     private String andress;
     @Column(name="email")
     private String email;
-    @Column(name="score_I")
-    private Double score_I = 0.0;
-    @Column(name="score_II")
-    private Double score_II = 0.0;
-
-    @Column(name="num_I")
-    private Integer num_I = 0;
-    @Column(name="num_II")
-    private Integer num_II = 0;
 
     @ManyToOne
     @JoinColumn(name = "classroom_ID")
     private Classroom classroom;
 
-    @OneToMany(mappedBy = "studyPK.student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Collection<Study> studies;
+    @OneToMany(mappedBy = "studyPK.student", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Study> studies = new HashSet<>();
 
     @Override
     public String toString() {

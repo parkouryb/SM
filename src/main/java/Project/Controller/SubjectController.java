@@ -69,4 +69,25 @@ public class SubjectController {
         return subject;
     }
 
+    public static int deleteSubject(Subject subject) {
+        if (subject == null)
+            return -2;
+        Session session = factory.openSession();
+        Transaction transaction = null;
+        int flag = 0;
+        try {
+            transaction = session.beginTransaction();
+            session.delete(subject);
+            transaction.commit();
+        } catch(HibernateException hibernateExeption) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            flag = -1;
+        } finally {
+            session.close();
+        }
+        return flag;
+    }
+
 }

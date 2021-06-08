@@ -10,6 +10,7 @@ import Project.Object.Subject;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Set;
 
 public class TestMain {
     @Test
@@ -60,24 +61,44 @@ public class TestMain {
 
     @Test
     public void studentLearn() {
-        Subject subject = new Subject();
-        subject.setSubject_name("Van");
-        subject.setSemester(1);
 
-        Study study = new Study();
-        study.setScore_15(10.);
-        study.setScore_45(10.);
-        study.setScore_mean(7.5);
-        study.getStudyPK().setSubject(subject);
+        Subject subject = SubjectController.getSubjectByName("Van", 2);
+        Student student = StudentController.getStudentByID(10000);
 
-        int fl = StudyController.addStudy(10000, study);
+        Study study = new Study(new Study.StudyPK(student, subject));
+        study.setScore_15(9.5);
+        study.setScore_45(9.0);
+        study.setScore_mean(10.);
+
+        int fl = StudyController.addStudy(study);
         System.out.println(fl);
-        if (fl == 0) {
-            int fll = StudentController.updateScore(10000, study);
-            System.out.println(fll);
+    }
+
+    @Test
+    public void deleteSubject() {
+        Subject subject = SubjectController.getSubjectByName("Toan", 1);
+        System.out.println(SubjectController.deleteSubject(subject));
+
+        if (subject == null) {
+            subject = new Subject();
+            subject.setSubject_name("Toan");
+            subject.setSemester(1);
         }
-        else {
-            System.out.println("Fail");
-        }
+        SubjectController.addSubject(subject);
+    }
+
+    @Test
+    public void getScores() {
+        Student student = StudentController.getStudentByID(10000);
+        System.out.println(StudentController.getScoreSemester(student, 1));
+    }
+
+    @Test
+    public void bieuMau4() {
+        Student student = StudentController.getStudentByID(10000);
+        Subject subject = SubjectController.getSubjectByName("Van", 1);
+
+        Study study = StudyController.getStudyByName(student, subject);
+        System.out.println(study);
     }
 }

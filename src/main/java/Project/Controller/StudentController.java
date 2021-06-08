@@ -11,6 +11,7 @@ import org.hibernate.Transaction;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Set;
 
 public class StudentController {
     // -1: loi db
@@ -107,36 +108,17 @@ public class StudentController {
         return students;
     }
 
-    public static int updateScore(int student_ID, Study study) {
-        Student student = getStudentByID(student_ID);
-        if (student == null)
-            return -2; // loi student null
-
-        Session session = factory.openSession();
-        Transaction transaction = null;
-        int flag = 0;
-        try {
-            transaction = session.beginTransaction();
-            if (study.getStudyPK().getSubject().getSemester() == 1) {
-                double x = study.getScore_mean() + student.getScore_I();
-                student.setScore_I(x / student.getNum_I());
+    public static double getScoreSemester(Student student, int semester) {
+        Set<Study> result = StudyController.getScoresBySemester(student, 1);
+        double diem = -1;
+        if (result != null) {
+            diem = 0.0;
+            for (Study study: result) {
+                diem += study.getScore_mean();
             }
-            else {
-                double x = study.getScore_mean() + student.getScore_II();
-                student.setScore_I(x / student.getNum_II());
-            }
-            session.update(student);
-
-            transaction.commit();
-        } catch(HibernateException hibernataeExeption) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            flag = -1;
-        } finally {
-            session.close();
+            diem /= result.size();
         }
-        return flag;
+        return diem;
     }
 
     public static void createStudents() {
