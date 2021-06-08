@@ -17,6 +17,7 @@ public class Menu extends javax.swing.JFrame {
     GUILession lession;
     GUIObject Object;
     GUIEndYear endyear;
+    GUIadmin admin;
             
     /**
      * Creates new form Menu
@@ -29,6 +30,7 @@ public class Menu extends javax.swing.JFrame {
         lession=new GUILession();
         Object= new GUIObject();
         endyear = new GUIEndYear();
+        admin= new GUIadmin();
         GridBagConstraints c = new GridBagConstraints();
         jpnView.setLayout(layout);
         c.gridx= 0;
@@ -49,6 +51,9 @@ public class Menu extends javax.swing.JFrame {
         c.gridx= 0;
         c.gridx=0;
         jpnView.add(endyear,c);
+        c.gridx= 0;
+        c.gridx=0;
+        jpnView.add(admin,c);
         hocvien.setVisible(true);
 
     }
@@ -70,6 +75,7 @@ public class Menu extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jpnView = new javax.swing.JPanel();
 
@@ -77,6 +83,7 @@ public class Menu extends javax.swing.JFrame {
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(179, 217, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 153), new java.awt.Color(0, 0, 153), new java.awt.Color(0, 0, 153), new java.awt.Color(0, 0, 153)));
 
         jLabel1.setFont(new java.awt.Font("Arial", 3, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 77, 153));
@@ -100,6 +107,7 @@ public class Menu extends javax.swing.JFrame {
         );
 
         jPanel2.setBackground(new java.awt.Color(179, 217, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 153), new java.awt.Color(0, 0, 153), new java.awt.Color(0, 0, 153), new java.awt.Color(0, 0, 153)));
         jPanel2.setForeground(new java.awt.Color(128, 191, 255));
 
         jButton1.setBackground(new java.awt.Color(0, 51, 102));
@@ -128,7 +136,7 @@ public class Menu extends javax.swing.JFrame {
         jButton4.setBackground(new java.awt.Color(0, 51, 102));
         jButton4.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jButton4.setForeground(new java.awt.Color(250, 250, 250));
-        jButton4.setText("Học Kì");
+        jButton4.setText("Học Kỳ");
         jButton4.setMaximumSize(new java.awt.Dimension(85, 25));
         jButton4.setMinimumSize(new java.awt.Dimension(85, 25));
         jButton4.setPreferredSize(new java.awt.Dimension(85, 25));
@@ -158,6 +166,16 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        jButton6.setBackground(new java.awt.Color(0, 51, 102));
+        jButton6.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(250, 250, 250));
+        jButton6.setText("Quản Trị Ứng Dụng");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -169,6 +187,7 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,7 +202,9 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(298, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(259, Short.MAX_VALUE))
         );
 
         jpnView.setPreferredSize(new java.awt.Dimension(1062, 850));
@@ -212,7 +233,7 @@ public class Menu extends javax.swing.JFrame {
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                .addComponent(jpnView, javax.swing.GroupLayout.DEFAULT_SIZE, 727, Short.MAX_VALUE)
+                .addComponent(jpnView, javax.swing.GroupLayout.DEFAULT_SIZE, 785, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -248,6 +269,7 @@ public class Menu extends javax.swing.JFrame {
          Object.setVisible(false);
          lession.setVisible(false);
          endyear.setVisible(false);
+         admin.setVisible(false);
          
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -258,6 +280,7 @@ public class Menu extends javax.swing.JFrame {
          Object.setVisible(true);
          lession.setVisible(false);
          endyear.setVisible(false);
+          admin.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -267,6 +290,7 @@ public class Menu extends javax.swing.JFrame {
          Object.setVisible(false);
          lession.setVisible(true);
          endyear.setVisible(false);
+          admin.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -276,6 +300,7 @@ public class Menu extends javax.swing.JFrame {
          Object.setVisible(false);
          lession.setVisible(false);
          endyear.setVisible(true);
+          admin.setVisible(false);
 
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -286,7 +311,18 @@ public class Menu extends javax.swing.JFrame {
          Object.setVisible(false);
          lession.setVisible(false);
          endyear.setVisible(false);
+          admin.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        hocvien.setVisible(false);
+         Class10.setVisible(false);
+         Object.setVisible(false);
+         lession.setVisible(false);
+         endyear.setVisible(false);
+          admin.setVisible(true);
+    }//GEN-LAST:event_jButton6ActionPerformed
    
     /**
      * @param args the command line arguments
@@ -330,6 +366,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;

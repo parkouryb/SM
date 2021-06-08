@@ -70,10 +70,10 @@ public class TestMain {
         study.setScore_mean(7.5);
         study.getStudyPK().setSubject(subject);
 
-        int fl = StudyController.addStudy(10000, study);
+        int fl = StudyController.addStudy(10017, study);
         System.out.println(fl);
         if (fl == 0) {
-            int fll = StudentController.updateScore(10000, study);
+            int fll = StudentController.updateScore(10017, study);
             System.out.println(fll);
         }
         else {
