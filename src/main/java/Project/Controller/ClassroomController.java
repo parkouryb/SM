@@ -5,6 +5,7 @@ import Project.Object.*;
 import org.hibernate.*;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -256,6 +257,25 @@ public class ClassroomController {
         bieumau5.setClassroom_name(classroom.getClass_name());
 
         return bieumau5;
+    }
+
+    public static Set<Classroom> getClassrooms() {
+        Session session = factory.openSession();
+        Transaction transaction = null;
+        Set<Classroom> classrooms = null;
+        try {
+            transaction = session.beginTransaction();
+            List<Classroom> list = session.createCriteria(Student.class).list();
+            classrooms = new HashSet<>(list);
+            transaction.commit();
+        } catch(HibernateException hibernataeExeption) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return classrooms;
     }
 
 }
