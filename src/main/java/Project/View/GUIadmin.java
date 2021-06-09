@@ -465,8 +465,9 @@ public class GUIadmin extends javax.swing.JPanel {
     }
     private void EditclassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditclassActionPerformed
         // TODO add your handling code here:
+
         if(txtoldName.getText().isEmpty()){
-             JOptionPane.showMessageDialog(this, "Bạn phải nhập lớp muốn thay đổi");
+             JOptionPane.showMessageDialog(this, "Lớp Không Tồn Tại");
         }
         else{
         int numSv=Integer.parseInt(txtInt.getText());

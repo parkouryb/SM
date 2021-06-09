@@ -278,6 +278,7 @@ public class Menu extends javax.swing.JFrame {
          hocvien.setVisible(false);
          Class10.setVisible(false);
          Object.setVisible(true);
+         Object.ReturnData();
          lession.setVisible(false);
          endyear.setVisible(false);
           admin.setVisible(false);
@@ -288,6 +289,7 @@ public class Menu extends javax.swing.JFrame {
          hocvien.setVisible(false);
          Class10.setVisible(false);
          Object.setVisible(false);
+         lession.ReloadData();
          lession.setVisible(true);
          endyear.setVisible(false);
           admin.setVisible(false);
@@ -300,6 +302,7 @@ public class Menu extends javax.swing.JFrame {
          Object.setVisible(false);
          lession.setVisible(false);
          endyear.setVisible(true);
+         endyear.ReturnShow();
           admin.setVisible(false);
 
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -308,6 +311,7 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
          hocvien.setVisible(false);
          Class10.setVisible(true);
+         Class10.ResultData();
          Object.setVisible(false);
          lession.setVisible(false);
          endyear.setVisible(false);

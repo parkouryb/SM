@@ -5,9 +5,11 @@
  */
 package Project.View;
 
+import Project.Controller.ClassroomController;
 import Project.Controller.StudentController;
 import Project.Controller.StudyController;
 import Project.Controller.SubjectController;
+import Project.Object.Classroom;
 import Project.Object.Student;
 import Project.Object.Study;
 import Project.Object.Subject;
@@ -15,6 +17,7 @@ import Project.Object.Subject;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -30,6 +33,7 @@ public class GUIObject extends javax.swing.JPanel {
     public GUIObject() {
         initComponents();
         model = (DefaultTableModel) jTable1.getModel();
+        ReturnData();
     }
 
     /**
@@ -47,7 +51,6 @@ public class GUIObject extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         txtID = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtObject = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         txtSember = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
@@ -58,11 +61,14 @@ public class GUIObject extends javax.swing.JPanel {
         txtTB = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
         btnshow = new javax.swing.JButton();
+        txtobject = new javax.swing.JTextField();
+        lbobject = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         txtclassnew = new javax.swing.JTextField();
+        lbclass = new javax.swing.JLabel();
 
         jLabel2.setFont(new java.awt.Font("Arial", 3, 36)); // NOI18N
         jLabel2.setText("Bảng Điểm Môn Học");
@@ -97,8 +103,6 @@ public class GUIObject extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Môn Học:");
-
-        txtObject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toan", "Ly", "Hoa", "Sinh", "Su", "Dia", "Van", "Dao Duc", "The Duc" }));
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -142,6 +146,9 @@ public class GUIObject extends javax.swing.JPanel {
             }
         });
 
+        lbobject.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        lbobject.setText("jLabel10");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -159,17 +166,20 @@ public class GUIObject extends javax.swing.JPanel {
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtSember, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtSember, 0, 148, Short.MAX_VALUE)
                             .addComponent(txtID)
-                            .addComponent(txtObject, 0, 148, Short.MAX_VALUE)
                             .addComponent(txt15)
                             .addComponent(txt45)
-                            .addComponent(txtTB)))
+                            .addComponent(txtTB)
+                            .addComponent(txtobject)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(66, 66, 66)
                         .addComponent(btnshow, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbobject, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,13 +188,11 @@ public class GUIObject extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
                     .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel3))
-                    .addComponent(txtObject))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtobject, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtSember, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
@@ -204,7 +212,9 @@ public class GUIObject extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                     .addComponent(btnshow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(442, 442, 442))
+                .addGap(34, 34, 34)
+                .addComponent(lbobject)
+                .addGap(395, 395, 395))
         );
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
@@ -220,17 +230,22 @@ public class GUIObject extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        lbclass.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        lbclass.setText("jLabel9");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(330, 330, 330)
+                .addContainerGap()
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtclassnew, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbclass, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 918, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,8 +253,9 @@ public class GUIObject extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(txtclassnew))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                    .addComponent(txtclassnew)
+                    .addComponent(lbclass))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(331, 331, 331))
         );
@@ -264,7 +280,24 @@ public class GUIObject extends javax.swing.JPanel {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
+    public  void ReturnData(){
+        Set<Subject> subject = SubjectController.getSubjects();
+        Set<String> listA=new HashSet<>();
+        for (Subject subjects: subject) {
 
+            listA.add(subjects.getSubject_name());
+
+        }
+        lbobject.setText("Môn: "+listA.toString());
+        Set<Classroom> classrooms = ClassroomController.getClassrooms();
+        List<String> listB = new ArrayList<>();
+        for (Classroom classroom : classrooms) {
+
+            listB.add(classroom.getClass_name());
+
+        }
+        lbclass.setText("Lớp: "+listB.toString());
+    }
     private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIDActionPerformed
@@ -288,7 +321,7 @@ public class GUIObject extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Điểm 0 <= x <= 10");
         }
         else{
-            Subject subject = SubjectController.getSubjectByName(txtObject.getSelectedItem().toString(), sember);
+            Subject subject = SubjectController.getSubjectByName(txtobject.getText(), sember);
             Student student = StudentController.getStudentByID(id);
 
             Study study = new Study(new Study.StudyPK(student, subject));
@@ -309,7 +342,7 @@ public class GUIObject extends javax.swing.JPanel {
         int sember = Integer.parseInt(txtSember.getSelectedItem().toString());
         for (Student student: students) {
             student = StudentController.getStudentByID(student.getStudent_ID());
-            Subject subject = SubjectController.getSubjectByName(txtObject.getSelectedItem().toString(), sember);
+            Subject subject = SubjectController.getSubjectByName(txtobject.getText(), sember);
             Study study = StudyController.getStudyByName(student, subject);
             if(study!=null){
                 model.addRow(new Object[]{
@@ -341,12 +374,14 @@ public class GUIObject extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lbclass;
+    private javax.swing.JLabel lbobject;
     private javax.swing.JTextField txt15;
     private javax.swing.JTextField txt45;
     private javax.swing.JTextField txtID;
-    private javax.swing.JComboBox<String> txtObject;
     private javax.swing.JComboBox<String> txtSember;
     private javax.swing.JTextField txtTB;
     private javax.swing.JTextField txtclassnew;
+    private javax.swing.JTextField txtobject;
     // End of variables declaration//GEN-END:variables
 }

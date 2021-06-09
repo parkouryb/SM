@@ -13,7 +13,11 @@ import Project.Object.Classroom;
 import Project.Object.Subject;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -32,6 +36,17 @@ public class GUIEndYear extends javax.swing.JPanel {
         initComponents();
         model1 = (DefaultTableModel) jTable1.getModel();
         model2 = (DefaultTableModel) jTable2.getModel();
+        ReturnShow();
+    }
+    public  void ReturnShow(){
+        Set<Subject> subject = SubjectController.getSubjects();
+        Set<String> listA=new HashSet<>();
+        for (Subject subjects: subject) {
+
+            listA.add(subjects.getSubject_name());
+
+        }
+        jLabel4.setText("Danh Sách Môn Hiện Tại: "+listA.toString());
     }
 
     /**
@@ -45,10 +60,11 @@ public class GUIEndYear extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        cbObject = new javax.swing.JComboBox<>();
         btnShow1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        txtObject = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -64,8 +80,6 @@ public class GUIEndYear extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel3.setText("Báo Cáo Tổng Kết Môn");
-
-        cbObject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toan", "Ly", "Hoa", "Sinh", "Su", "Dia", "Van", "Dao Duc", "The Duc" }));
 
         btnShow1.setText("Hiển Thị");
         btnShow1.addActionListener(new java.awt.event.ActionListener() {
@@ -84,24 +98,31 @@ public class GUIEndYear extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jLabel4.setText("jLabel4");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 532, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(176, 176, 176)
-                        .addComponent(cbObject, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnShow1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 532, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(186, 186, 186)
+                                .addComponent(txtObject, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnShow1))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(127, 127, 127)
+                                .addComponent(jLabel3))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(127, 127, 127)
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,11 +131,13 @@ public class GUIEndYear extends javax.swing.JPanel {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbObject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnShow1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(btnShow1)
+                    .addComponent(txtObject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(269, Short.MAX_VALUE))
         );
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
@@ -159,9 +182,9 @@ public class GUIEndYear extends javax.swing.JPanel {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnshow2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(41, 41, 41)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(306, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Arial", 3, 36)); // NOI18N
@@ -225,19 +248,25 @@ public class GUIEndYear extends javax.swing.JPanel {
     private void btnShow1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShow1ActionPerformed
         // TODO add your handling code here:
         model1.setRowCount(0);
-        int i=1;
-        int sem = Integer.parseInt(cbsem.getSelectedItem().toString());
-        Set<Classroom> classrooms = ClassroomController.getClassrooms();
-        Subject subject = SubjectController.getSubjectByName(cbObject.getSelectedItem().toString(), sem);
-        for (Classroom classroom: classrooms) {
-            Bieumau5 bieumau5 = ClassroomController.getInfo51(classroom, subject);
-            if(bieumau5.getNumber()!=0){
-                model1.addRow(new Object[]{
-                        i++,classroom.getClass_name(),bieumau5.getNumber(),bieumau5.getPass(),(float)(bieumau5.getPass())/(bieumau5.getNumber())
-                });
-            }
+        if(txtObject.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this,"Nhập Môn Học");
+        }
+        else{
+            int i=1;
+            int sem = Integer.parseInt(cbsem.getSelectedItem().toString());
+            Set<Classroom> classrooms = ClassroomController.getClassrooms();
+            Subject subject = SubjectController.getSubjectByName(txtObject.getText(), sem);
+            for (Classroom classroom: classrooms) {
+                Bieumau5 bieumau5 = ClassroomController.getInfo51(classroom, subject);
+                if(bieumau5.getNumber()!=0){
+                    model1.addRow(new Object[]{
+                            i++,classroom.getClass_name(),bieumau5.getNumber(),bieumau5.getPass(),(float)(bieumau5.getPass())/(bieumau5.getNumber())
+                    });
+                }
 
             }
+        }
+
 
 
 
@@ -265,11 +294,11 @@ public class GUIEndYear extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnShow1;
     private javax.swing.JButton btnshow2;
-    private javax.swing.JComboBox<String> cbObject;
     private javax.swing.JComboBox<String> cbsem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -278,5 +307,6 @@ public class GUIEndYear extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTextField txtObject;
     // End of variables declaration//GEN-END:variables
 }
