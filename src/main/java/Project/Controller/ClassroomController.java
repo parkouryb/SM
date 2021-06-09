@@ -123,6 +123,9 @@ public class ClassroomController {
         if (student == null || classroom == null) {
             return -2;
         }
+        if (classroom.getStudents().size() == classroom.getNumber()) {
+            return -3;
+        }
         Session session = factory.openSession();
         Transaction transaction = null;
         int flag = 0;
