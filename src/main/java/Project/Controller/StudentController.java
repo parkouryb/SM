@@ -108,7 +108,7 @@ public class StudentController {
     }
 
     public static double getScoreSemester(Student student, int semester) {
-        Set<Study> result = StudyController.getScoresBySemester(student, 1);
+        Set<Study> result = StudyController.getScoresBySemester(student, semester);
         double diem = -1;
         if (result != null) {
             diem = 0.0;

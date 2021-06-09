@@ -5,6 +5,7 @@
  */
 package Project.View;
 
+import Project.Controller.ClassroomController;
 import Project.Controller.StudentController;
 import Project.Object.Student;
 
@@ -13,6 +14,9 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -27,6 +31,7 @@ public class GUIStudent extends javax.swing.JPanel {
     public GUIStudent() {
         initComponents();
         model = (DefaultTableModel) jTable1.getModel();
+        showDatabase();
     }
 
     /**
@@ -53,10 +58,11 @@ public class GUIStudent extends javax.swing.JPanel {
         txtEmail = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        BtnAdd = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        BtnSearch = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        txtID = new javax.swing.JTextField();
 
         setMinimumSize(new java.awt.Dimension(1062, 850));
         setPreferredSize(new java.awt.Dimension(1062, 850));
@@ -126,18 +132,29 @@ public class GUIStudent extends javax.swing.JPanel {
             jTable1.getColumnModel().getColumn(3).setPreferredWidth(5);
         }
 
-        jButton1.setText("Thêm Mới");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BtnAdd.setText("Thêm Mới");
+        BtnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BtnAddActionPerformed(evt);
             }
         });
 
         jButton2.setText("Sửa");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Xóa");
+        BtnSearch.setText("Tìm Kiếm");
+        BtnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSearchActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Tìm Kiếm");
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel7.setText("MaHV: ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -145,15 +162,23 @@ public class GUIStudent extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(BtnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BtnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel6)
-                                    .addComponent(jLabel1))
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel4))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtadderss, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -162,18 +187,10 @@ public class GUIStudent extends javax.swing.JPanel {
                                     .addComponent(txtGender, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(29, 29, 29)))
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -203,16 +220,17 @@ public class GUIStudent extends javax.swing.JPanel {
                             .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(40, 40, 40)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BtnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(38, 38, 38)
+                        .addGap(35, 35, 35)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(BtnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)
+                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(188, Short.MAX_VALUE))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -231,48 +249,104 @@ public class GUIStudent extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
       int i=1001;
-    private void jButton1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    public void showResult() {
+        model.setRowCount(0);
+        Set<Student> students = StudentController.getStudents();
+        System.out.print(students);
+        for (Student student : students) {
+            model.addRow(new Object[]{
+                    student.getStudent_ID(), student.getStudent_name(), student.getGender(), student.getBirthday(), student.getAndress(), student.getEmail()
+            });
+        }
+    }
+    public void showDatabase() {
+        Set<Student> students = StudentController.getStudents();
+        System.out.print(students);
+        for (Student student : students) {
+            model.addRow(new Object[]{
+                    student.getStudent_ID(), student.getStudent_name(), student.getGender(), student.getBirthday(), student.getAndress(), student.getEmail()
+            });
+        }
+    }
+
+    private void BtnAddActionPerformed(ActionEvent evt) {//GEN-FIRST:event_BtnAddActionPerformed
         // TODO add your handling code here:
-        
-        Student student1 = new Student();
-        student1.setStudent_name(txtName.getText());
-        student1.setBirthday(txtNgaysinh.getText());
-        student1.setGender(txtGender.getSelectedItem().toString());
-        student1.setAndress(txtadderss.getText());
-        student1.setEmail(txtEmail.getText());
-        long id = StudentController.addStudent(student1);
-        System.out.println(id);
+        if(txtName.getText().isEmpty()||txtNgaysinh.getText().isEmpty()||txtadderss.getText().isEmpty()||txtEmail.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!!!");
+        }
+        else {
+            Student student1 = new Student();
+
+            student1.setStudent_name(txtName.getText());
+            student1.setBirthday(txtNgaysinh.getText());
+
+            student1.setGender(txtGender.getSelectedItem().toString());
+            student1.setAndress(txtadderss.getText());
+            student1.setEmail(txtEmail.getText());
+            long id = StudentController.addStudent(student1);
+            switch ((int) id) {
+                case -2:
+                    JOptionPane.showMessageDialog(this, "Lưu không thành công!!!");
+                    break;
+                case -3:
+                    JOptionPane.showMessageDialog(this, "Số tuổi hợp lệ từ 15-20");
+                    break;
+                case -1:
+                    JOptionPane.showMessageDialog(this, "Định dạng dd/mm/yyyy");
+                    break;
+                default:
+
+            }
+
+            showResult();
+        }
         System.out.println("Done!!!");
 
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_BtnAddActionPerformed
+
+    private void BtnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSearchActionPerformed
+        // TODO add your handling code here:\
+        if(txtID.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Bạn Cần Nhập Thông Tin !");
+        }
+        else {
+            model.setRowCount(0);
+            long id = Integer.parseInt(txtID.getText());
+            Student student=StudentController.getStudentByID(id);
+            model.addRow(new Object[]{
+                    student.getStudent_ID(), student.getStudent_name(), student.getGender(), student.getBirthday(), student.getAndress(), student.getEmail()
+            });
+        }
+
+    }//GEN-LAST:event_BtnSearchActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton BtnAdd;
+    private javax.swing.JButton BtnSearch;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JComboBox<String> txtGender;
+    private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtNgaysinh;
     private javax.swing.JTextField txtadderss;
     // End of variables declaration//GEN-END:variables
 
-    public void showResult() {
-//        Student s = list.get(list.size()-1);
-//         model.addRow(new Object[]{
-//             s.getmaNV(),s.gettennv(),s.getgioitinh(),date_format.format(s.getngaysinh()),s.getdiachi(),s.getEmail()
-//         });
-    }
+
 }
