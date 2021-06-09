@@ -11,6 +11,7 @@ import org.hibernate.id.enhanced.SequenceStyleGenerator;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Getter @Setter
@@ -18,7 +19,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name="Student")
-public class Student {
+public class Student implements Comparable<Student> {
     @Id
     @GenericGenerator(name = "INST_PK_SEQ_STUDENT",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
@@ -55,6 +56,8 @@ public class Student {
     @OneToMany(mappedBy = "studyPK.student", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Study> studies = new HashSet<>();
 
+
+
     @Override
     public String toString() {
         return "Student{" +
@@ -63,5 +66,10 @@ public class Student {
                 ", birthday='" + birthday + '\'' +
                 ", classroom=" + classroom +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Student o) {
+        return (int) (this.student_ID - o.getStudent_ID());
     }
 }

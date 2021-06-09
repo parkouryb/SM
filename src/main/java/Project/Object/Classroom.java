@@ -17,7 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name="Classroom")
-public class Classroom {
+public class Classroom implements Comparable<Classroom>{
     @Id
     @GenericGenerator(name = "INST_PK_SEQ_CLASSROOM",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
@@ -55,5 +55,11 @@ public class Classroom {
                 ", class_name='" + class_name + '\'' +
                 ", current='" + students.size() + '\'' +
                 '}';
+    }
+
+
+    @Override
+    public int compareTo(Classroom o) {
+        return (int) (this.classroom_ID - o.getClassroom_ID());
     }
 }
