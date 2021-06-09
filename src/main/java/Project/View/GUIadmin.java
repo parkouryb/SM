@@ -12,6 +12,7 @@ package Project.View;
 import Project.Controller.ClassroomController;
 import Project.Controller.StudentController;
 import Project.Controller.SubjectController;
+import Project.Object.Classroom;
 import Project.Object.Subject;
 
 import javax.swing.JOptionPane;
@@ -71,6 +72,7 @@ public class GUIadmin extends javax.swing.JPanel {
         cbsem = new javax.swing.JComboBox<>();
         btndelete = new javax.swing.JButton();
         btnadd = new javax.swing.JButton();
+        AddClass = new javax.swing.JButton();
 
         setMinimumSize(new java.awt.Dimension(1062, 850));
         setPreferredSize(new java.awt.Dimension(1062, 850));
@@ -256,6 +258,13 @@ public class GUIadmin extends javax.swing.JPanel {
             }
         });
 
+        AddClass.setText("Tạo");
+        AddClass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddClassActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -315,7 +324,9 @@ public class GUIadmin extends javax.swing.JPanel {
                                     .addComponent(Editclass, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
                                     .addComponent(txtInt))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+                                    .addComponent(AddClass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -362,7 +373,8 @@ public class GUIadmin extends javax.swing.JPanel {
                     .addComponent(jLabel15)
                     .addComponent(txtoldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17)
-                    .addComponent(txtInt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtInt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AddClass))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
@@ -503,8 +515,22 @@ public class GUIadmin extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btndeleteActionPerformed
 
+    private void AddClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddClassActionPerformed
+        // TODO add your handling code here:
+        if (txtnewname.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this,"Cần Nhập Tên Mới!!");
+        }else {
+            Classroom classroom = new Classroom();
+            classroom.setClass_name(txtnewname.getText());
+            ClassroomController.addClassroom(classroom);
+
+        }
+        
+    }//GEN-LAST:event_AddClassActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddClass;
     private javax.swing.JButton Editclass;
     private javax.swing.JButton btnadd;
     private javax.swing.JButton btndelete;

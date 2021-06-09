@@ -5,11 +5,9 @@
  */
 package Project.View;
 
-import Project.Controller.ClassroomController;
 import Project.Controller.StudentController;
 import Project.Controller.StudyController;
 import Project.Controller.SubjectController;
-import Project.Object.Classroom;
 import Project.Object.Student;
 import Project.Object.Study;
 import Project.Object.Subject;
@@ -64,7 +62,7 @@ public class GUIObject extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        cbclass = new javax.swing.JComboBox<>();
+        txtclassnew = new javax.swing.JTextField();
 
         jLabel2.setFont(new java.awt.Font("Arial", 3, 36)); // NOI18N
         jLabel2.setText("Bảng Điểm Môn Học");
@@ -76,7 +74,7 @@ public class GUIObject extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(485, 485, 485)
                 .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(485, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,8 +220,6 @@ public class GUIObject extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        cbclass.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10A1", "10A2", "10A3", "10A4", "11A1", "11A2", "11A3", "12A1", "12A2" }));
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -232,20 +228,18 @@ public class GUIObject extends javax.swing.JPanel {
                 .addGap(330, 330, 330)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbclass, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(317, Short.MAX_VALUE))
+                .addComponent(txtclassnew, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollPane1)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(cbclass)
-                        .addGap(2, 2, 2))
-                    .addComponent(jLabel8))
-                .addGap(20, 20, 20)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtclassnew))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(331, 331, 331))
         );
@@ -311,7 +305,7 @@ public class GUIObject extends javax.swing.JPanel {
     private void btnshowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnshowActionPerformed
         // TODO add your handling code here:
         model.setRowCount(0);
-        Set<Student> students = ClassroomController.getStudents(cbclass.getSelectedItem().toString());
+        Set<Student> students = StudentController.getStudents();
         int sember = Integer.parseInt(txtSember.getSelectedItem().toString());
         for (Student student: students) {
             student = StudentController.getStudentByID(student.getStudent_ID());
@@ -334,7 +328,6 @@ public class GUIObject extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnshow;
-    private javax.swing.JComboBox<String> cbclass;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -354,5 +347,6 @@ public class GUIObject extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> txtObject;
     private javax.swing.JComboBox<String> txtSember;
     private javax.swing.JTextField txtTB;
+    private javax.swing.JTextField txtclassnew;
     // End of variables declaration//GEN-END:variables
 }

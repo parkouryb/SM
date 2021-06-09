@@ -7,6 +7,7 @@ import Project.Controller.SubjectController;
 import Project.Object.*;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -141,6 +142,17 @@ public class TestMain {
             }
 
         }
+    }
+    @Test
+    public void testlist(){
+        Set<Classroom> classrooms = ClassroomController.getClassrooms();
+        List<String> listA=new ArrayList<>();
+        for (Classroom classroom: classrooms) {
+
+            listA.add(classroom.getClass_name());
+
+        }
+        System.out.println(listA);
     }
 
 }
