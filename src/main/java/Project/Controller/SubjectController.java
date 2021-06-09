@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -134,5 +135,24 @@ public class SubjectController {
                 }
             }
         }
+    }
+
+    public static Set<Subject> getSubjects() {
+        Session session = factory.openSession();
+        Transaction transaction = null;
+        Set<Subject> subjects = null;
+        try {
+            transaction = session.beginTransaction();
+            List<Subject> list = session.createCriteria(Subject.class).list();
+            subjects = new HashSet<>(list);
+            transaction.commit();
+        } catch(HibernateException hibernataeExeption) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return subjects;
     }
 }
