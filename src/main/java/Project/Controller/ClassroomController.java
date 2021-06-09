@@ -220,7 +220,9 @@ public class ClassroomController {
 
     public static Bieumau5 getInfo52(Classroom classroom, int semester) {
         Bieumau5 bieumau5 = new Bieumau5();
-        Collection<Student> students = classroom.getStudents();
+        Set<Student> students = classroom.getStudents();
+        if (students == null) return null;
+
         int count = 0;
         for (Student student: students) {
             double diem = StudentController.getScoreSemester(student, semester);
@@ -236,7 +238,8 @@ public class ClassroomController {
 
     public static Bieumau5 getInfo51(Classroom classroom, Subject subject) {
         Bieumau5 bieumau5 = new Bieumau5();
-        Collection<Student> students = classroom.getStudents();
+        Set<Student> students = classroom.getStudents();
+        if (students == null) return null;
         int count = 0;
         for (Student student: students) {
             Set<Study> studies = student.getStudies();
@@ -265,7 +268,7 @@ public class ClassroomController {
         Set<Classroom> classrooms = null;
         try {
             transaction = session.beginTransaction();
-            List<Classroom> list = session.createCriteria(Student.class).list();
+            List<Classroom> list = session.createCriteria(Classroom.class).list();
             classrooms = new HashSet<>(list);
             transaction.commit();
         } catch(HibernateException hibernataeExeption) {

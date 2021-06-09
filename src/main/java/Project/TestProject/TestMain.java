@@ -118,9 +118,16 @@ public class TestMain {
 
     @Test
     public void bieumau51() {
-        Classroom classroom = ClassroomController.getClassroomByID(ClassroomController.getIDByName("10A3"));
+//        Classroom classroom = ClassroomController.getClassroomByID(ClassroomController.getIDByName("10A3"));
+//        Subject subject = SubjectController.getSubjectByName("Toan", 1);
+//        Bieumau5 bieumau5 = ClassroomController.getInfo51(classroom, subject);
+//        System.out.println(bieumau5);
+
+        Set<Classroom> classrooms = ClassroomController.getClassrooms();
         Subject subject = SubjectController.getSubjectByName("Toan", 1);
-        Bieumau5 bieumau5 = ClassroomController.getInfo51(classroom, subject);
-        System.out.println(bieumau5);
+        for (Classroom classroom: classrooms) {
+            Bieumau5 bieumau5 = ClassroomController.getInfo51(classroom, subject);
+            System.out.println(bieumau5);
+        }
     }
 }
