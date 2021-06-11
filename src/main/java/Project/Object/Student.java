@@ -56,7 +56,8 @@ public class Student implements Comparable<Student> {
     @OneToMany(mappedBy = "studyPK.student", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Study> studies = new HashSet<>();
 
-
+    @OneToOne(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Account account;
 
     @Override
     public String toString() {

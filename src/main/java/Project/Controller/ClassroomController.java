@@ -25,7 +25,7 @@ public class ClassroomController {
         ClassroomController.diemxephang = diemxephang;
     }
 
-    private static SessionFactory factory = HibernateUtil.getSessionFactory();
+    private static final SessionFactory factory = HibernateUtil.getSessionFactory();
 
     public static int addClassroom(Classroom classroom) {
         Session session = factory.openSession();
@@ -35,7 +35,7 @@ public class ClassroomController {
             transaction = session.beginTransaction();
             session.save(classroom);
             transaction.commit();
-        } catch(HibernateException hibernataeExeption) {
+        } catch (HibernateException hibernataeExeption) {
             if (transaction != null) {
                 transaction.rollback();
             }
@@ -54,7 +54,7 @@ public class ClassroomController {
             transaction = session.beginTransaction();
 
             List<Classroom> lists = session.createCriteria(Classroom.class).list();
-            for (Classroom classroom: lists) {
+            for (Classroom classroom : lists) {
                 if (classroom.getClass_name().equals(name)) {
                     id = (int) classroom.getClassroom_ID();
                     break;
@@ -62,7 +62,7 @@ public class ClassroomController {
             }
 
             transaction.commit();
-        } catch(HibernateException hibernataeExeption) {
+        } catch (HibernateException hibernataeExeption) {
             if (transaction != null) {
                 transaction.rollback();
             }
@@ -86,7 +86,7 @@ public class ClassroomController {
             students = classroom.getStudents();
 
             transaction.commit();
-        } catch(HibernateException hibernataeExeption) {
+        } catch (HibernateException hibernataeExeption) {
             if (transaction != null) {
                 transaction.rollback();
             }
@@ -107,7 +107,7 @@ public class ClassroomController {
             classroom = (Classroom) session.get(Classroom.class, classroom_ID);
 
             transaction.commit();
-        } catch(HibernateException hibernataeExeption) {
+        } catch (HibernateException hibernataeExeption) {
             if (transaction != null) {
                 transaction.rollback();
             }
@@ -136,7 +136,7 @@ public class ClassroomController {
             session.update(student);
 
             transaction.commit();
-        } catch(HibernateException hibernataeExeption) {
+        } catch (HibernateException hibernataeExeption) {
             if (transaction != null) {
                 transaction.rollback();
             }
@@ -157,24 +157,21 @@ public class ClassroomController {
             long id = getIDByName(old_classroom_name);
             if (id < 0) {
                 flag = -3;
-            }
-            else {
+            } else {
                 Classroom classroom = getClassroomByID(id);
                 if (classroom == null) {
                     flag = -4;
-                }
-                else {
+                } else {
                     if (isChangeClassName) {
                         classroom.setClass_name(classroom_name);
-                    }
-                    else {
+                    } else {
                         classroom.setNumber(number);
                     }
                     session.update(classroom);
                 }
             }
             transaction.commit();
-        } catch(HibernateException hibernataeExeption) {
+        } catch (HibernateException hibernataeExeption) {
             if (transaction != null) {
                 transaction.rollback();
             }
@@ -187,7 +184,7 @@ public class ClassroomController {
 
     public static void createClassroom() {
         String[] names = new String[]{"10A1", "10A2", "10A3", "10A4", "11A1", "11A2", "11A3", "12A1", "12A2"};
-        for (String name: names) {
+        for (String name : names) {
             Classroom classroom = new Classroom();
             classroom.setClass_name(name);
             classroom.setNumber(40);
@@ -210,7 +207,7 @@ public class ClassroomController {
             transaction = session.beginTransaction();
             session.delete(classroom);
             transaction.commit();
-        } catch(HibernateException hibernataeExeption) {
+        } catch (HibernateException hibernataeExeption) {
             if (transaction != null) {
                 transaction.rollback();
             }
@@ -227,10 +224,10 @@ public class ClassroomController {
         if (students == null) return null;
 
         int count = 0;
-        for (Student student: students) {
+        for (Student student : students) {
             double diem = StudentController.getScoreSemester(student, semester);
             if (diem >= diemxephang) {
-                count ++;
+                count++;
             }
         }
         bieumau5.setClassroom_name(classroom.getClass_name());
@@ -244,10 +241,10 @@ public class ClassroomController {
         Set<Student> students = classroom.getStudents();
         if (students == null) return null;
         int count = 0;
-        for (Student student: students) {
+        for (Student student : students) {
             Set<Study> studies = student.getStudies();
             double diem = 0.0;
-            for (Study study: studies) {
+            for (Study study : studies) {
                 Subject temp = study.getStudyPK().getSubject();
                 if (temp.getSemester().equals(subject.getSemester()) && temp.getSubject_name().equals(subject.getSubject_name())) {
                     diem = study.getScore_mean();
@@ -255,7 +252,7 @@ public class ClassroomController {
                 }
             }
             if (diem >= diemxephang) {
-                count ++;
+                count++;
             }
         }
         bieumau5.setPass(count);
@@ -274,7 +271,7 @@ public class ClassroomController {
             List<Classroom> list = session.createCriteria(Classroom.class).list();
             classrooms = new HashSet<>(list);
             transaction.commit();
-        } catch(HibernateException hibernataeExeption) {
+        } catch (HibernateException hibernataeExeption) {
             if (transaction != null) {
                 transaction.rollback();
             }

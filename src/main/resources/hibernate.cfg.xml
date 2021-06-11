@@ -27,5 +27,6 @@
         <mapping class="Project.Object.Classroom" />
         <mapping class="Project.Object.Study" />
         <mapping class="Project.Object.Student" />
+        <mapping class="Project.Object.Account" />
     </session-factory>
 </hibernate-configuration>

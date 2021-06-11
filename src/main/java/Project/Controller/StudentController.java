@@ -168,4 +168,21 @@ public class StudentController {
             session.close();
         }
     }
+
+    public static void updateAccount(Student student) {
+        Session session = factory.openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            student.setAccount(null);
+            session.update(student);
+            transaction.commit();
+        } catch(HibernateException hibernateExeption) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+    }
 }

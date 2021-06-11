@@ -1,9 +1,6 @@
 package Project.TestProject;
 
-import Project.Controller.ClassroomController;
-import Project.Controller.StudentController;
-import Project.Controller.StudyController;
-import Project.Controller.SubjectController;
+import Project.Controller.*;
 import Project.Object.*;
 import org.junit.Test;
 
@@ -12,6 +9,39 @@ import java.util.List;
 import java.util.Set;
 
 public class TestMain {
+
+    @Test
+    public void createAccount() {
+        Account account = new Account();
+        account.setUsername("admin");
+        account.setPassword("admin");
+        account.setRole(Role.STUDENT);
+        AccountController.createAccount(account);
+
+        // dang nhap
+        Account x = AccountController.login(account);
+        if (x != null) {
+            System.out.println(x.getRole()); // lấy role như này
+        }
+        // ông sau khi đăng nhập xong sẽ trả về 1 đối tượng account
+        // ông sẽ lưu nó trên fe cái role của nó để quyết nhé
+
+        // giả sử tạo tài khoản xong sẽ đến 1 bảng là nhập thông tin học sinh xong, ông sẽ có 2 đối tượng
+        // là Account và Student(phải được lấy từ db ra)
+        // ví dụ x là account tôi đăng nhập được rồi. h tôi thêm thông tin học sinh vào tài khoản đấy
+        Student student = new Student();
+        student.setStudent_name("hihi");
+        student.setBirthday("01/01/2005");
+        long id = StudentController.addStudent(student);
+        // nếu id mà > 0 thì là tạo thôgn tin thành công thì sẽ có 2 đối tươgnj là account và student này
+        // , h cần ghép 2 ông này lại với nhau
+
+        if (id > 0) {
+            int fl = AccountController.addInfo(x, student);
+            System.out.println(fl);
+        }
+    }
+
     @Test
     //Done
     public void createDb() {
