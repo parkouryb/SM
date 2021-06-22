@@ -11,6 +11,43 @@ import java.util.Set;
 public class TestMain {
 
     @Test
+    public void testDeleteStudent() {
+        Student student = StudentController.getStudentByID(10007);
+        System.out.println(StudentController.deleteStudent(student));;
+    }
+
+    @Test
+    public void updateStudent() {
+        Student student = StudentController.getStudentByID(10001);
+        student.setAndress("hihi");
+        System.out.println(StudentController.updateStudent(student));
+    }
+
+    @Test
+    public void updateScore() {
+        Student student = StudentController.getStudentByID(10001);
+        Subject subject = SubjectController.getSubjectByName("Toan", 1);
+        Study study = StudyController.getStudyByName(student, subject);
+        if (study == null) System.out.println("null");
+        else {
+            study.setScore_15(10.);
+            study.setScore_45(8.);
+            System.out.println(StudyController.updateScore(study));
+        }
+    }
+
+    @Test
+    public void deleteScore() {
+        Student student = StudentController.getStudentByID(10001);
+        Subject subject = SubjectController.getSubjectByName("Toan", 1);
+        Study study = StudyController.getStudyByName(student, subject);
+        if (study == null) System.out.println("null");
+        else {
+            System.out.println(StudyController.deleteScore(study));
+        }
+    }
+
+    @Test
     public void createAccount() {
         Account account = new Account();
         account.setUsername("admin");
@@ -29,14 +66,9 @@ public class TestMain {
         // giả sử tạo tài khoản xong sẽ đến 1 bảng là nhập thông tin học sinh xong, ông sẽ có 2 đối tượng
         // là Account và Student(phải được lấy từ db ra)
         // ví dụ x là account tôi đăng nhập được rồi. h tôi thêm thông tin học sinh vào tài khoản đấy
-        Student student = new Student();
-        student.setStudent_name("hihi");
-        student.setBirthday("01/01/2005");
-        long id = StudentController.addStudent(student);
-        // nếu id mà > 0 thì là tạo thôgn tin thành công thì sẽ có 2 đối tươgnj là account và student này
-        // , h cần ghép 2 ông này lại với nhau
+        Student student = StudentController.getStudentByID(10000);
 
-        if (id > 0) {
+        if (student != null) {
             int fl = AccountController.addInfo(x, student);
             System.out.println(fl);
         }

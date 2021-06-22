@@ -89,5 +89,42 @@ public class StudyController {
         return study;
     }
 
+    public static int updateScore(Study study) {
+        Session session = factory.openSession();
+        Transaction transaction = null;
+        int flag = 0;
+        try {
+            transaction = session.beginTransaction();
+            session.update(study);
+            transaction.commit();
+        } catch(HibernateException hibernataeExeption) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            flag = -1;
+        } finally {
+            session.close();
+        }
+        return flag;
+    }
 
+
+    public static int deleteScore(Study study) {
+        Session session = factory.openSession();
+        Transaction transaction = null;
+        int flag = 0;
+        try {
+            transaction = session.beginTransaction();
+            session.delete(study);
+            transaction.commit();
+        } catch(HibernateException hibernataeExeption) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            flag = -1;
+        } finally {
+            session.close();
+        }
+        return flag;
+    }
 }

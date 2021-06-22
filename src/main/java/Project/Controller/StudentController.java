@@ -185,4 +185,41 @@ public class StudentController {
             session.close();
         }
     }
+
+    public static int deleteStudent(Student student) {
+        Session session = factory.openSession();
+        Transaction transaction = null;
+        int flag = 0;
+        try {
+            transaction = session.beginTransaction();
+            session.delete(student);
+            transaction.commit();
+        } catch(HibernateException hibernateExeption) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            flag = -1;
+        } finally {
+            session.close();
+        }
+        return flag;
+    }
+    public static int updateStudent(Student student) {
+        Session session = factory.openSession();
+        Transaction transaction = null;
+        int flag = 0;
+        try {
+            transaction = session.beginTransaction();
+            session.update(student);
+            transaction.commit();
+        } catch(HibernateException hibernateExeption) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            flag = -1;
+        } finally {
+            session.close();
+        }
+        return flag;
+    }
 }
